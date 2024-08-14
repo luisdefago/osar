@@ -3,7 +3,7 @@ const sequelize = require('./utils/connect')
 
 const main = async () => {
     try {
-        await sequelize.sync({ force: true })
+        await sequelize.sync()
         console.log('database connected');
         
         app.listen(3001, () => {
