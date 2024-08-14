@@ -36,3 +36,4 @@ build/
 coverage/
 *.tgz
 *.lock
+.vercel
