@@ -4,9 +4,18 @@ import styles from './login.module.css';
 function Login() {
   const [documento, setDocumento] = useState('');
   const [password, setPassword] = useState('');
+  const [errorDocumento, setErrorDocumento] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (isNaN(documento)) {
+      setErrorDocumento('El número de documento debe ser un número.');
+      return;
+    } else {
+      setErrorDocumento('');
+    }
+
     console.log('Login attempted with:', documento, password);
   };
 
@@ -25,6 +34,7 @@ function Login() {
               onChange={(e) => setDocumento(e.target.value)}
               required
             />
+            {errorDocumento && <p className={styles.errorMessage}>{errorDocumento}</p>}
           </div>
           <div className={styles.inputGroup}>
             <label htmlFor="password">Contraseña</label>
