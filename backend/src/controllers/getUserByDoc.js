@@ -1,3 +1,4 @@
+const { Usuario, Comprobante } = require('../models');
 
 const getUserByDocumento = async (req, res) => {
     const { documento } = req.params;
@@ -20,3 +21,5 @@ const getUserByDocumento = async (req, res) => {
         res.status(500).json({ message: 'Error fetching user by documento', error: error.toString() });
     }
 };
+
+module.exports = { getUserByDocumento };
