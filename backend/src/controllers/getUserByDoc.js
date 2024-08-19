@@ -6,8 +6,8 @@ const getUserByDocumento = async (req, res) => {
         const user = await Usuario.findOne({
             where: { documento },
             include: [{
-            model: Comprobante,
-            as: 'comprobantes',
+                model: Comprobante,
+                as: 'comprobantes',
             }],
         });
     

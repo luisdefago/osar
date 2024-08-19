@@ -13,8 +13,8 @@ const { getUserByDocumento } = require('../controllers/getUserByDoc');
 const router = express.Router();
 
 router.get('/users', getAllUsers);
-router.get('/users/:id', getUserById);
-router.get('/users/:documento', getUserByDocumento);
+router.get('/users/id/:id', getUserById);
+router.get('/users/documento/:documento', getUserByDocumento);
 router.get('/tickets', getAllTickets);
 
 router.post('/users/create', postUser);
