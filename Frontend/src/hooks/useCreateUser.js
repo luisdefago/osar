@@ -22,7 +22,7 @@ export const useCreateUser = () => {
       const user = userCredential.user;
 
       // Crear el usuario en tu API
-      const response = await axios.post('https://osar.vercel.app/api/users/create', {
+      const response = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/users/create`, {
         documento,
         email,
         nombreCompleto,
