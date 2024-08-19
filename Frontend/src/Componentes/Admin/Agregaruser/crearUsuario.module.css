@@ -10,7 +10,7 @@
 
 .formContainer {
     background-color: rgba(30, 30, 30, 0.9);
-    padding: 3rem 2.5rem;
+    padding: 1.5rem 2.5rem 2.5rem;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
     max-width: 500px;
@@ -31,7 +31,7 @@
 
 .title {
     color: #ffffff;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
     font-size: 2.2rem;
     text-align: center;
     text-transform: uppercase;
