@@ -8,6 +8,7 @@ const { deleteTicketById } = require('../controllers/deleteTicketById');
 const { updateUserById } = require('../controllers/updateUserById');
 const { updateTicketById } = require('../controllers/updateTicketById');
 const { getUserById } = require('../controllers/getUserById');
+const { getUserByDocumento } = require('../controllers/getUserByDoc');
 
 const router = express.Router();
 
