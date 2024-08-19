@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'; // Asegúrate de haber inicializado Firebase
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import app from '../firebase/firebaseConfig';
 
 export const useCreateUser = () => {
   const [loading, setLoading] = useState(false);
@@ -11,8 +12,10 @@ export const useCreateUser = () => {
     setError(null);
 
     try {
+      // Obtener la instancia de auth (la inicialización debe estar hecha)
+      const auth = getAuth(app);
+
       // Crear usuario en Firebase Authentication
-      const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(auth, email, documento);
 
       // Usuario creado exitosamente en Firebase

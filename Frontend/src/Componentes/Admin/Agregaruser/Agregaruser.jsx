@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './crearUsuario.module.css';
+
 import {
   validarEmail,
   validarDocumento,
@@ -7,6 +8,8 @@ import {
   validarFechaInscripcion,
   formatearFecha
 } from './validaciones';
+import { useCreateUser } from '../../../hooks/useCreateUser';
+
 
 function CrearUsuario() {
   const [email, setEmail] = useState('');
@@ -14,19 +17,24 @@ function CrearUsuario() {
   const [nombreCompleto, setNombreCompleto] = useState('');
   const [fechaInscripcion, setFechaInscripcion] = useState('');
   const [errors, setErrors] = useState({});
+  const { createUser, loading, error } = useCreateUser();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
 
     if (!validarEmail(email)) newErrors.email = 'El email debe ser válido.';
-    if (!validarDocumento(documento)) newErrors.documento = 'El número de documento debe ser un número válido.';
+    if (!validarDocumento(documento)) newErrors.documento = 'El número de documento debe ser un número de 8 digitos.';
     if (!validarNombreCompleto(nombreCompleto)) newErrors.nombreCompleto = 'El nombre completo es obligatorio.';
     if (!validarFechaInscripcion(fechaInscripcion)) newErrors.fechaInscripcion = 'La fecha debe ser dd/mm/aa.';
 
     if (Object.keys(newErrors).length === 0) {
-      console.log('Usuario creado:', { email, documento, nombreCompleto, fechaInscripcion });
+      const result = await createUser({ documento, email, nombreCompleto, fechaInscripcion });
+
+      if (result) {
+        console.log('Usuario creado exitosamente:', result);
+      }
     }
 
     setErrors(newErrors);
@@ -85,13 +93,17 @@ function CrearUsuario() {
               id="fechaInscripcion"
               value={fechaInscripcion}
               onChange={handleFechaInscripcionChange}
-              maxLength={8}
+              maxLength={8} 
               required
             />
             {errors.fechaInscripcion && <p className={styles.errorMessage}>{errors.fechaInscripcion}</p>}
           </div>
 
-          <button type="submit" className={styles.submitButton}>Crear Usuario</button>
+          <button type="submit" className={styles.submitButton} disabled={loading}>
+            {loading ? 'Creando...' : 'Crear Usuario'}
+          </button>
+
+          {error && <p className={styles.errorMessage}>Error: {error.message}</p>}
         </form>
       </div>
     </div>
