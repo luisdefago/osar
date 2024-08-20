@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './InfoUser.module.css';
 import { useStore } from '../../store/store';
 
@@ -11,7 +11,7 @@ const InfoUser = () => {
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
   const meses = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
-  
+
   const comprobantesMap = user.comprobantes.reduce((map, comp) => {
     const { año, mes } = comp;
     if (!map[año]) {
