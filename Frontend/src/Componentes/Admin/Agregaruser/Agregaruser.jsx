@@ -10,13 +10,13 @@ import {
 } from './validaciones';
 import { useCreateUser } from '../../../hooks/useCreateUser';
 
-
 function CrearUsuario() {
   const [email, setEmail] = useState('');
   const [documento, setDocumento] = useState('');
   const [nombreCompleto, setNombreCompleto] = useState('');
   const [fechaInscripcion, setFechaInscripcion] = useState('');
   const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState('');
   const { createUser, loading, error } = useCreateUser();
 
   const handleSubmit = async (e) => {
@@ -34,20 +34,27 @@ function CrearUsuario() {
 
       if (result) {
         console.log('Usuario creado exitosamente:', result);
+        setMessage('Usuario creado exitosamente.');
       }
     }
 
     setErrors(newErrors);
   };
 
+  const handleInputChange = (setter) => (e) => {
+    setter(e.target.value);
+    setMessage('');
+  };
+
   const handleFechaInscripcionChange = (e) => {
     const formattedFecha = formatearFecha(e.target.value);
     setFechaInscripcion(formattedFecha);
+    setMessage('');
   };
 
   return (
     <div className={styles.formWrapper}>
-      <div className={styles.formContainer}>
+      <div className={message ? styles.formContainerWithResult : styles.formContainer}>
         <h1 className={styles.title}>Crear Usuario</h1>
         <form onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
@@ -56,7 +63,7 @@ function CrearUsuario() {
               type="email"
               id="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleInputChange(setEmail)}
               required
             />
             {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
@@ -68,7 +75,7 @@ function CrearUsuario() {
               type="text"
               id="documento"
               value={documento}
-              onChange={(e) => setDocumento(e.target.value)}
+              onChange={handleInputChange(setDocumento)}
               required
             />
             {errors.documento && <p className={styles.errorMessage}>{errors.documento}</p>}
@@ -80,7 +87,7 @@ function CrearUsuario() {
               type="text"
               id="nombreCompleto"
               value={nombreCompleto}
-              onChange={(e) => setNombreCompleto(e.target.value)}
+              onChange={handleInputChange(setNombreCompleto)}
               required
             />
             {errors.nombreCompleto && <p className={styles.errorMessage}>{errors.nombreCompleto}</p>}
@@ -104,6 +111,7 @@ function CrearUsuario() {
           </button>
 
           {error && <p className={styles.errorMessage}>Error: {error.message}</p>}
+          {message && <p className={styles.resultMessage}>{message}</p>}
         </form>
       </div>
     </div>
