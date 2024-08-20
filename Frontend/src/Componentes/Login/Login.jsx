@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import styles from './login.module.css';
+import { useLoginUser } from '../../hooks/useLoginUser';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [documento, setDocumento] = useState('');
   const [password, setPassword] = useState('');
   const [errorDocumento, setErrorDocumento] = useState('');
+  const { loginUser, loading, error } = useLoginUser();
+  const navigate = useNavigate(); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isNaN(documento)) {
@@ -16,7 +20,12 @@ function Login() {
       setErrorDocumento('');
     }
 
-    console.log('Login attempted with:', documento, password);
+    const result = await loginUser({ documento, password });
+
+    if (result) {
+      console.log('Login successful:', result);
+      navigate('/Info-user');
+    }
   };
 
   return (
@@ -46,7 +55,10 @@ function Login() {
               required
             />
           </div>
-          <button type="submit" className={styles.submitButton}>Iniciar sesión</button>
+          <button type="submit" className={styles.submitButton} disabled={loading}>
+            {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+          </button>
+          {error && <p className={styles.errorMessage}>Error: {error.message}</p>}
         </form>
       </div>
     </div>
