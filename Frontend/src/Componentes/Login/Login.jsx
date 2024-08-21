@@ -24,7 +24,7 @@ function Login() {
 
     if (result) {
       console.log('Login successful:', result);
-      navigate('/Info-user');
+      result.administrador ? navigate('/Admin') : navigate('/Info-user');
     }
   };
 
