@@ -5,17 +5,19 @@ import Infouser from './Componentes/Infouser/Infouser';
 import Admindashboard from './Componentes/Admin/Admindashboard/Admindashboard';
 import Agregaruser from './Componentes/Admin/Agregaruser/Agregaruser';
 import Editaruser from './Componentes/Admin/Editaruser/Editaruser';
+import AdminRecibos from './Componentes/Admin/AdminRecibos/AdminRecibos';
 
 function App() {
   return (
     <Routes>
-             <Route path="/" exact>
+            <Route path="/" exact>
                 <Route path="/" element={<Login/>}/>
                 <Route path="/Info-user" element={<Infouser/>}/>
                 <Route path="/Admin" element={<Admindashboard/>}/>
                 <Route path="/Agregar-usuario" element={<Agregaruser/>}/>
                 <Route path="/Datos-usuario" element={<Editaruser/>}/>
-             </Route>
+                <Route path="/admin/recibos/:userId" element={<AdminRecibos />} />
+            </Route>
     </Routes>
   )
 }

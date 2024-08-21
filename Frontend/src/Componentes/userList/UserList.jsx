@@ -7,6 +7,10 @@ const UserList = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const users = useStore((state) => state.users);
 
+    if (!users) {
+        return <div></div>;
+    }
+
     const filteredUsers = users.filter((user) =>
         user.nombreCompleto.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -30,7 +34,7 @@ const UserList = () => {
             </div>
             {filteredUsers.length > 0 ? (
                 filteredUsers.map((user, index) => (
-                <UserCard key={index} name={user.nombreCompleto} />
+                <UserCard key={index} name={user.nombreCompleto} id={user.id}/>
                 ))
             ) : (
                 <div className={styles.emptyMessage}>No hay usuarios disponibles.</div>

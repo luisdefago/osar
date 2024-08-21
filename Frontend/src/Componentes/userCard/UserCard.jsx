@@ -1,11 +1,19 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './UserCard.module.css';
-const UserCard = ({ name }) => {
-    return (
-      <div className={styles.userCardContainer}>
-        <span className={styles.userName}>{name}</span>
-        <span className={styles.arrowIcon}>{'>'}</span>
-      </div>
-    );
+
+const UserCard = ({ name, id }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/admin/recibos/${id}`);
   };
-  
-  export default UserCard;
+
+  return (
+    <div className={styles.userCardContainer} onClick={handleClick}>
+      <span className={styles.userName}>{name}</span>
+      <span className={styles.arrowIcon}>{'>'}</span>
+    </div>
+  );
+};
+
+export default UserCard;

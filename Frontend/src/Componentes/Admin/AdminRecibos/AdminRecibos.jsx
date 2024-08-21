@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './AdminRecibos.module.css';
 import { format } from 'date-fns';
-import { useCreateTicket } from '../../hooks/useCreateTicket';
-import { useUpdateTicket } from '../../hooks/useUpdateTicket';
+import { useCreateTicket } from '../../../hooks/useCreateTicket';
+import { useUpdateTicket } from '../../../hooks/useUpdateTicket';
+import { useStore } from '../../../store/store';
+import { useParams } from 'react-router-dom';
 
-const AdminRecibos = ({ user }) => {
+const AdminRecibos = () => {
+  // Llamada a hooks en la parte superior
+  const { users } = useStore((state) => state);
+  const { userId } = useParams();
+  
+  // Inicialización de estados
+  const [user, setUser] = useState(null);
   const [selectedComprobante, setSelectedComprobante] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [newComprobante, setNewComprobante] = useState({
@@ -13,11 +21,24 @@ const AdminRecibos = ({ user }) => {
     año: new Date().getFullYear(),
     fechaPago: format(new Date(), 'yyyy-MM-dd'),
     monto: 0,
-    usuarioId: user.id,
+    usuarioId: user?.id || 0, // Asegúrate de que usuarioId esté correctamente inicializado
   });
-  
+
   const { createTicket } = useCreateTicket();
   const { updateTicket } = useUpdateTicket();
+
+  useEffect(() => {
+    // Encuentra al usuario solo si users y userId están definidos
+    if (users && userId) {
+      const findUser = users.find((u) => u.id === parseInt(userId, 10));
+      setUser(findUser || null);
+    }
+  }, [users, userId]);
+
+  // Asegúrate de que user esté definido antes de usarlo
+  if (!user) {
+    return <div>Cargando...</div>;
+  }
 
   const fechaInscripcion = new Date(user.fechaInscripcion);
   const yearInscripcion = fechaInscripcion.getFullYear();
@@ -35,11 +56,7 @@ const AdminRecibos = ({ user }) => {
   }, {});
 
   const handleCellClick = (comprobante) => {
-    if (selectedComprobante === comprobante) {
-      setSelectedComprobante(null);
-    } else {
-      setSelectedComprobante(comprobante);
-    }
+    setSelectedComprobante(prev => prev === comprobante ? null : comprobante);
   };
 
   const handleAddClick = (month, year) => {
@@ -55,13 +72,17 @@ const AdminRecibos = ({ user }) => {
   };
 
   const handleSave = async () => {
-    if (selectedComprobante) {
-      await updateTicket(selectedComprobante.id, newComprobante);
-    } else {
-      await createTicket(newComprobante);
+    try {
+      if (selectedComprobante) {
+        await updateTicket(selectedComprobante.id, newComprobante);
+      } else {
+        await createTicket(newComprobante);
+      }
+      setSelectedComprobante(null);
+      setIsAdding(false);
+    } catch (error) {
+      console.error('Error saving comprobante:', error);
     }
-    setSelectedComprobante(null);
-    setIsAdding(false);
   };
 
   const generateRows = () => {
@@ -71,17 +92,17 @@ const AdminRecibos = ({ user }) => {
         const monthNumber = index + 1;
 
         if (year === yearInscripcion && monthNumber < fechaInscripcion.getMonth() + 1) {
-          return <td key={index}></td>;
+          return <td key={monthNumber}></td>;
         }
 
         if (year === currentYear && monthNumber > currentMonth) {
-          return <td key={index}></td>;
+          return <td key={monthNumber}></td>;
         }
 
         const comprobante = comprobantesMap[year]?.[monthNumber];
         return (
           <td
-            key={index}
+            key={monthNumber}
             className={comprobante ? styles.comprobante : styles.noComprobante}
             onClick={() => comprobante && handleCellClick(comprobante)}
           >
