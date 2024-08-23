@@ -1,0 +1,75 @@
+  
+  .addButton {
+    background-color: #9fffa3;
+    color: #000000;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .addButton:hover {
+    background-color: #45a049;
+  }
+  
+  .addButton:active {
+    background-color: #39873a;
+  }
+
+
+  @media (max-width: 768px) {
+    .tableContainer {
+      padding: 1.5rem;
+    }
+  
+    .table th, .table td {
+      padding: 8px;
+      font-size: 0.75rem;
+    }
+  
+    .title {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .table {
+    width: 100%;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #444;
+    padding: 12px;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #b3b3b3;
+  }
+  
+  .table th {
+    background-color: #444;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .yearCell {
+    font-weight: bold;
+    color: #ff6347;
+  }
+  
+  .comprobante {
+    color: #4CAF50;
+    font-weight: bold;
+    background-color: rgba(76, 175, 80, 0.1);
+    border-radius: 4px;
+  }
+  
+  .noComprobante {
+    color: #ff6347;
+    font-style: italic;
+    background-color: rgba(255, 99, 71, 0.1);
+    border-radius: 4px;
+  }
+  
+  .table td:hover {
+    background-color: rgba(255, 99, 71, 0.15);
+  }

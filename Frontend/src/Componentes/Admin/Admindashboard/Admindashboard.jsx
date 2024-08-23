@@ -3,10 +3,12 @@ import UserList from '../../userList/UserList';
 import styles from './admindashboard.module.css';
 import { useFetchUsers } from '../../../hooks/useFetchUsers';
 import { useStore } from '../../../store/store';
+import { useNavigate } from 'react-router-dom';
 
 function Admindashboard() {
   const { user } = useStore();
   const { loading, error } = useFetchUsers();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if (!user?.administrador) {
@@ -38,6 +40,11 @@ function Admindashboard() {
         )}
         {error && <p className={styles.errorMessage}>Error al cargar usuarios: {error.message}</p>}
         {!loading && !error && <UserList />}
+        <div className={styles.navigateAddUserContainer} >
+          <button className={styles.navigateAddUserBtn}  onClick={() => navigate('/Agregar-usuario')}>
+              Agregar usuario
+          </button>
+        </div>
       </div>
     </div>
   );
