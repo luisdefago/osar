@@ -14,6 +14,7 @@ const AdminRecibos = () => {
   const [user, setUser] = useState(null);
   const [selectedComprobante, setSelectedComprobante] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
+  const [comprobantesMap, setComprobantesMap] = useState({});
   const [newComprobante, setNewComprobante] = useState({
     numeroRecibo: '',
     mes: new Date().getMonth() + 1,
@@ -26,32 +27,30 @@ const AdminRecibos = () => {
   const { createTicket } = useCreateTicket();
   const { updateTicket } = useUpdateTicket();
 
-
-  useEffect(() => {
-    console.log(selectedComprobante);
-  },[selectedComprobante])
+  const meses = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth() + 1;
 
   useEffect(() => {
     if (users && userId) {
       const findUser = users.find((u) => u.id === parseInt(userId, 10));
       setUser(findUser || null);
+  
+      if (findUser) {
+        const initialComprobantesMap = findUser.comprobantes.reduce((map, comp) => {
+          const { año, mes } = comp;
+          if (!map[año]) map[año] = {};
+          map[año][mes] = comp;
+          return map;
+        }, {});
+        setComprobantesMap(initialComprobantesMap);
+      }
     }
   }, [users, userId]);
 
   if (!user) {
     return <div>Cargando...</div>;
   }
-
-  const meses = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
-  const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth() + 1;
-
-  const comprobantesMap = user.comprobantes.reduce((map, comp) => {
-    const { año, mes } = comp;
-    if (!map[año]) map[año] = {};
-    map[año][mes] = comp;
-    return map;
-  }, {});
 
   const handleCellClick = (comprobante) => {
     if(comprobante){
@@ -85,11 +84,43 @@ const AdminRecibos = () => {
 
   const handleSave = async () => {
     try {
+      let updatedComprobante;
+  
       if (selectedComprobante) {
-        await updateTicket(selectedComprobante.id, newComprobante);
+        updatedComprobante = await updateTicket(selectedComprobante.id, newComprobante);
       } else {
-        await createTicket(newComprobante);
+        updatedComprobante = await createTicket(newComprobante);
       }
+
+      console.log('users:' ,users);
+      
+
+      const updatedUsers = users.map((u) => {
+        if (u.id === user.id) {
+          const updatedComprobantes = selectedComprobante
+            ? u.comprobantes.map((comp) =>
+                comp.id === updatedComprobante.id ? updatedComprobante : comp
+              )
+            : [...u.comprobantes, updatedComprobante];
+  
+          return { ...u, comprobantes: updatedComprobantes };
+        }
+        return u;
+      });
+  
+      useStore.getState().setUsers(updatedUsers);
+
+      const updatedUser = updatedUsers.find((u) => u.id === user.id);
+      const updatedComprobantesMap = updatedUser.comprobantes.reduce((map, comp) => {
+        const { año, mes } = comp;
+        if (!map[año]) map[año] = {};
+        map[año][mes] = comp;
+        return map;
+      }, {});
+  
+      setUser(updatedUser);
+      setComprobantesMap(updatedComprobantesMap);
+  
       setSelectedComprobante(null);
       setIsAdding(false);
     } catch (error) {

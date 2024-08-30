@@ -21,7 +21,19 @@
     font-size: 1.5rem;
 }
 
-.arrowIcon {
-    color: #ff6347;
-    font-size: 1.5rem;
+.editBtn{
+    background-color: #363535;
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+}
+
+.editBtn:hover {
+    transform: translateY(-3px);
 }

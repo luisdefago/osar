@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './ComprobanteTable.module.css';
 
 const ComprobanteTable = ({ user, comprobantesMap, handleCellClick, handleAddClick, meses, currentYear, currentMonth }) => {
     const fechaInscripcion = new Date(user.fechaInscripcion);
     const yearInscripcion = fechaInscripcion.getFullYear();
+
+    useEffect(() => {
+        console.log("Rendering ComprobanteTable with comprobantesMap:", comprobantesMap);
+    }, [comprobantesMap]);
+    
 
     const generateRows = () => {
         const rows = [];

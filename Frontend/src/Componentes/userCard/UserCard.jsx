@@ -8,10 +8,15 @@ const UserCard = ({ name, id }) => {
     navigate(`/admin/recibos/${id}`);
   };
 
+  const handleEditClick = (e) => {
+    e.stopPropagation(); 
+    navigate(`/admin/editar/${id}`);
+  };
+
   return (
     <div className={styles.userCardContainer} onClick={handleClick}>
       <span className={styles.userName}>{name}</span>
-      <span className={styles.arrowIcon}>{'>'}</span>
+      <span className={styles.editBtn} onClick={handleEditClick}>Editar</span>
     </div>
   );
 };
