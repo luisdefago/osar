@@ -72,11 +72,9 @@ function EditUser() {
         administrador: user.administrador
       });
 
-      if (updatedUser) {
+      if (updatedUser.user) {
         setMessage('Usuario actualizado exitosamente.');
-        setUsers((prevUsers) =>
-          prevUsers.map((u) => (u.id === parseInt(id) ? updatedUser : u))
-        );
+        setUsers(users.map((u) => (u.id === parseInt(id) ? updatedUser.user : u)));
         navigate('/Admin');
       }
     } else {

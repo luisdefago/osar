@@ -31,8 +31,6 @@ export const useCreateUser = () => {
         administrador: false,
       });
 
-      console.log('Usuario creado en la API:', response.data);
-
       return response.data;
     } catch (err) {
       console.error('Error creando el usuario:', err);

@@ -12,8 +12,6 @@ export const useUpdateTicket = () => {
     try {
       const response = await axios.put(`${import.meta.env.VITE_URL_BACKEND}/tickets/${id}`, updatedData);
 
-      console.log('Recibo actualizado en la API:', response.data);
-
       return response.data;
     } catch (err) {
       console.error('Error actualizando el recibo:', err);

@@ -13,8 +13,6 @@ export const useCreateTicket = () => {
       // Realizar la solicitud POST a la API para crear el recibo
       const response = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/tickets/create`, ticketData);
 
-      console.log('Recibo creado en la API:', response.data);
-
       return response.data;
     } catch (err) {
       console.error('Error creando el recibo:', err);

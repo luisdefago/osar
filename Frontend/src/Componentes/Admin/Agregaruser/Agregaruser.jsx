@@ -43,7 +43,6 @@ function CrearUsuario() {
       const result = await createUser({ documento, email, nombreCompleto, fechaInscripcion });
 
       if (result) {
-        console.log('Usuario creado exitosamente:', result);
         setMessage('Usuario creado exitosamente.');
       }
     }

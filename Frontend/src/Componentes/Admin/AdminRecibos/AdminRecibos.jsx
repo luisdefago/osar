@@ -96,9 +96,6 @@ const AdminRecibos = () => {
         updatedComprobante = await createTicket(newComprobante);
       }
 
-      console.log('users:' ,users);
-      
-
       const updatedUsers = users.map((u) => {
         if (u.id === user.id) {
           const updatedComprobantes = selectedComprobante

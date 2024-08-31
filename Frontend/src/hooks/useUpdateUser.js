@@ -20,9 +20,7 @@ export const useEditUser = () => {
         mesesDesubscripto: mesesDesubscripto || [],
         administrador: administrador ?? false,
       });
-
-      console.log('Usuario actualizado en la API:', response.data);
-
+      
       return response.data;
     } catch (err) {
       console.error('Error actualizando el usuario:', err);

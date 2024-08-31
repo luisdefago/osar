@@ -5,11 +5,6 @@ const ComprobanteTable = ({ user, comprobantesMap, handleCellClick, handleAddCli
     const fechaInscripcion = new Date(user.fechaInscripcion);
     const yearInscripcion = fechaInscripcion.getFullYear();
 
-    useEffect(() => {
-        console.log("Rendering ComprobanteTable with comprobantesMap:", comprobantesMap);
-    }, [comprobantesMap]);
-    
-
     const generateRows = () => {
         const rows = [];
         for (let year = yearInscripcion; year <= currentYear; year++) {
