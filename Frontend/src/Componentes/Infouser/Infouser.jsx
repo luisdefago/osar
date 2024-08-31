@@ -1,10 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './InfoUser.module.css';
 import { useStore } from '../../store/store';
 
 const InfoUser = () => {
   const { user } = useStore();
   const [selectedComprobante, setSelectedComprobante] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
+  if (!user) {
+    return null;
+  }
 
   const fechaInscripcion = new Date(user.fechaInscripcion);
   const yearInscripcion = fechaInscripcion.getFullYear();
