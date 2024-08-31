@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './crearUsuario.module.css';
 
 import {
@@ -9,8 +9,12 @@ import {
   formatearFecha
 } from './validaciones';
 import { useCreateUser } from '../../../hooks/useCreateUser';
+import { useNavigate } from 'react-router-dom';
+import { useStore } from '../../../store/store';
 
 function CrearUsuario() {
+  const navigate = useNavigate();
+  const { users } = useStore((state) => state);
   const [email, setEmail] = useState('');
   const [documento, setDocumento] = useState('');
   const [nombreCompleto, setNombreCompleto] = useState('');
@@ -18,6 +22,12 @@ function CrearUsuario() {
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
   const { createUser, loading, error } = useCreateUser();
+
+  useEffect(() => {
+    if (!users) {
+      navigate('/Admin');
+    }
+  }, [users]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

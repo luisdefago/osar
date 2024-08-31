@@ -16,7 +16,7 @@ function EditUser() {
   const navigate = useNavigate();
   const { users, setUsers } = useStore();
 
-  const { editUser, loading, error } = useEditUser();
+  const { editUser, loading: savingLoading, error } = useEditUser();
 
   const [email, setEmail] = useState('');
   const [documento, setDocumento] = useState('');
@@ -30,11 +30,15 @@ function EditUser() {
     const fecha = new Date(fechaISO);
     const dia = fecha.getDate().toString().padStart(2, '0');
     const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-    const anio = fecha.getFullYear().toString().slice(2); 
+    const anio = fecha.getFullYear().toString().slice(2);
     return `${dia}/${mes}/${anio}`;
   };
 
   useEffect(() => {
+    if (!users) {
+      navigate('/Admin');
+      return;
+    }
     const foundUser = users.find((u) => u.id === parseInt(id));
     if (foundUser) {
       setUser(foundUser);
@@ -60,23 +64,19 @@ function EditUser() {
     if (Object.keys(newErrors).length === 0) {
       const updatedUser = await editUser(id, {
         documento,
-        oldEmail: user.email, // Usar el email original como oldEmail
-        newEmail: email, // Pasar el email actualizado como newEmail
+        oldEmail: user.email,
+        newEmail: email,
         nombreCompleto,
         fechaInscripcion,
-        mesesDesubscripto: user.mesesDesubscripto, // Mantener los meses de desuscripción actuales
-        administrador: user.administrador // Mantener el estado de administrador actual
+        mesesDesubscripto: user.mesesDesubscripto,
+        administrador: user.administrador
       });
 
       if (updatedUser) {
         setMessage('Usuario actualizado exitosamente.');
-
-        // Actualizar el estado local de los usuarios
         setUsers((prevUsers) =>
           prevUsers.map((u) => (u.id === parseInt(id) ? updatedUser : u))
         );
-
-        // Redirigir después de la actualización exitosa
         navigate('/Admin');
       }
     } else {
@@ -95,8 +95,14 @@ function EditUser() {
     setMessage('');
   };
 
-  // Render only when the user is loaded
-  if (!user) return <p>Cargando...</p>;
+  if (!users) {
+    return (
+      <div className={styles.loadingWrapper}>
+        <div className={styles.loader}></div>
+        <p className={styles.loadingMessage}>Cargando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.formWrapper}>
@@ -146,14 +152,14 @@ function EditUser() {
               id="fechaInscripcion"
               value={fechaInscripcion}
               onChange={handleFechaInscripcionChange}
-              maxLength={8} 
+              maxLength={8}
               required
             />
             {errors.fechaInscripcion && <p className={styles.errorMessage}>{errors.fechaInscripcion}</p>}
           </div>
 
-          <button type="submit" className={styles.submitButton} disabled={loading}>
-            {loading ? 'Guardando...' : 'Guardar cambios'}
+          <button type="submit" className={styles.submitButton} disabled={savingLoading}>
+            {savingLoading ? 'Guardando...' : 'Guardar cambios'}
           </button>
 
           {error && <p className={styles.errorMessage}>Error: {error.message}</p>}

@@ -4,11 +4,12 @@ import { format } from 'date-fns';
 import { useCreateTicket } from '../../../hooks/useCreateTicket';
 import { useUpdateTicket } from '../../../hooks/useUpdateTicket';
 import { useStore } from '../../../store/store';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ComprobanteForm from './comprobanteForm/ComprobanteForm';
 import ComprobanteTable from './comprobanteTable/ComprobanteTable';
 
 const AdminRecibos = () => {
+  const navigate = useNavigate();
   const { users } = useStore((state) => state);
   const { userId } = useParams();
   const [user, setUser] = useState(null);
@@ -32,6 +33,9 @@ const AdminRecibos = () => {
   const currentMonth = new Date().getMonth() + 1;
 
   useEffect(() => {
+    if (!users) {
+      navigate('/Admin');
+    }
     if (users && userId) {
       const findUser = users.find((u) => u.id === parseInt(userId, 10));
       setUser(findUser || null);
