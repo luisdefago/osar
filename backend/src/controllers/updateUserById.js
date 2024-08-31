@@ -7,10 +7,13 @@ const updateUserById = async (req, res) => {
 
   try {
     const user = await Usuario.findByPk(id);
-    
+
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
+
+    // Verificar si el documento ha cambiado
+    const documentoChanged = documento && documento !== user.documento;
 
     // Si el email ha cambiado, actualizarlo en Firebase Authentication
     if (oldEmail && newEmail && oldEmail !== newEmail) {
@@ -25,6 +28,22 @@ const updateUserById = async (req, res) => {
       } catch (firebaseError) {
         console.error('Error actualizando el correo en Firebase:', firebaseError);
         return res.status(500).json({ message: 'Error updating email in Firebase', error: firebaseError.toString() });
+      }
+    }
+
+    // Si el documento ha cambiado, actualizar la contraseña en Firebase Authentication
+    if (documentoChanged) {
+      try {
+        // Obtener el usuario por el correo electrónico actual (oldEmail)
+        const firebaseUser = await admin.auth().getUserByEmail(newEmail || oldEmail);
+
+        // Actualizar la contraseña en Firebase (la nueva contraseña será el nuevo documento)
+        await admin.auth().updateUser(firebaseUser.uid, { password: documento });
+
+        console.log(`Contraseña actualizada para el usuario ${newEmail || oldEmail} con el nuevo documento ${documento}`);
+      } catch (firebaseError) {
+        console.error('Error actualizando la contraseña en Firebase:', firebaseError);
+        return res.status(500).json({ message: 'Error updating password in Firebase', error: firebaseError.toString() });
       }
     }
 
@@ -45,3 +64,4 @@ const updateUserById = async (req, res) => {
 };
 
 module.exports = { updateUserById };
+
