@@ -7,7 +7,7 @@ import { useStore } from '../store/store';
 export const useLoginUser = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const {setUser} = useStore();
+  const { setUser } = useStore();
 
   const loginUser = async ({ documento, password }) => {
     setLoading(true);
@@ -23,13 +23,13 @@ export const useLoginUser = () => {
 
       const { email } = userData;
 
-      // Get auth instance
       const auth = getAuth(app);
-
-      // Sign in with email and password (documento as password)
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-    userCredential && setUser(userData);
+      if (userCredential) {
+        setUser(userData);
+        localStorage.setItem('loggedUser', JSON.stringify({email, documento}));
+      }
 
       return userData;
     } catch (err) {
