@@ -21,14 +21,14 @@ export const useLoginUser = () => {
         throw new Error('Usuario no encontrado');
       }
 
-      const { email } = userData;
+      const { email, administrador } = userData;
 
       const auth = getAuth(app);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
       if (userCredential) {
         setUser(userData);
-        localStorage.setItem('loggedUser', JSON.stringify({email, documento}));
+        localStorage.setItem('loggedUser', JSON.stringify({email, documento, administrador}));
       }
 
       return userData;

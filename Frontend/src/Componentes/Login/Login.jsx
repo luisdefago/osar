@@ -32,7 +32,6 @@ function Login() {
     const result = await loginUser({ documento, password });
 
     if (result) {
-      console.log('Login successful:', result);
       result.administrador ? navigate('/Admin') : navigate('/Info-user');
     }
   };
@@ -45,7 +44,6 @@ function Login() {
       });
 
       if (result) {
-        console.log('Login successful:', result);
         result.administrador ? navigate('/Admin') : navigate('/Info-user');
       }
     }
