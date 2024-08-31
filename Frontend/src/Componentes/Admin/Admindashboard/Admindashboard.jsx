@@ -6,16 +6,25 @@ import { useStore } from '../../../store/store';
 import { useNavigate } from 'react-router-dom';
 
 function Admindashboard() {
-  const { user } = useStore();
+  const { user, setUser } = useStore();
   const { loading, error } = useFetchUsers();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user?.administrador) {
-      console.warn('Acceso denegado: solo administradores');
-      return;
+    if (!user) {
+      const loggedUser = localStorage.getItem('loggedUser');
+
+      if (loggedUser) {
+        const parsedUser = JSON.parse(loggedUser);
+
+        if (parsedUser.administrador) {
+          setUser(parsedUser);
+        }
+      } else {
+        navigate('/');
+      }
     }
-  }, [user]);
+  }, [user, setUser, navigate]);
 
   if (!user?.administrador) {
     return (
@@ -40,9 +49,9 @@ function Admindashboard() {
         )}
         {error && <p className={styles.errorMessage}>Error al cargar usuarios: {error.message}</p>}
         {!loading && !error && <UserList />}
-        <div className={styles.navigateAddUserContainer} >
-          <button className={styles.navigateAddUserBtn}  onClick={() => navigate('/Agregar-usuario')}>
-              Agregar usuario
+        <div className={styles.navigateAddUserContainer}>
+          <button className={styles.navigateAddUserBtn} onClick={() => navigate('/Agregar-usuario')}>
+            Agregar usuario
           </button>
         </div>
       </div>
