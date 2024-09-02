@@ -7,6 +7,7 @@ import { useStore } from '../../../store/store';
 import { useNavigate, useParams } from 'react-router-dom';
 import ComprobanteForm from './comprobanteForm/ComprobanteForm';
 import ComprobanteTable from './comprobanteTable/ComprobanteTable';
+import arrowIcon from '../../../assets/arrow.png';
 
 const AdminRecibos = () => {
   const navigate = useNavigate();
@@ -132,7 +133,12 @@ const AdminRecibos = () => {
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.tableContainer}>
-        <h1 className={styles.title}>Gestión de Comprobantes</h1>
+        <div className={styles.header}>
+          <button className={styles.backButton} onClick={() => navigate('/Admin')}>
+            <img src={arrowIcon} alt="Volver" className={styles.arrowIcon} />
+          </button>
+          <h1 className={styles.title}>Gestión de Comprobantes</h1>
+        </div>
         <h2 className={styles.name}>{user.nombreCompleto}</h2>
         <ComprobanteTable
           user={user}

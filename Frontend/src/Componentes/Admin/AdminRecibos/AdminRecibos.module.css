@@ -1,53 +1,88 @@
 .pageWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 85vh;
-    background-color: #363535;
-    padding: 3rem 0;
-  }
-  
-  .tableContainer {
-    background-color: rgba(30, 30, 30, 0.9);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-    max-width: 80%;
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  background-color: #363535;
+  padding: 3rem 0;
+}
+
+.tableContainer {
+  background-color: rgba(30, 30, 30, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+  max-width: 80%;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
       opacity: 0;
       transform: scale(0.95);
-    }
-    to {
+  }
+  to {
       opacity: 1;
       transform: scale(1);
-    }
   }
-  
-  
-  @media (max-width: 768px) {
-    .tableContainer {
+}
+
+@media (max-width: 768px) {
+  .tableContainer {
       padding: 1.5rem;
-    }
-  
-    .table th, .table td {
-      padding: 8px;
-      font-size: 0.75rem;
-    }
-  
-    .title {
-      font-size: 1.8rem;
-    }
   }
 
-  .title, .name {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
+  .table th, .table td {
+      padding: 8px;
+      font-size: 0.75rem;
   }
+
+  .title {
+      font-size: 1.8rem;
+  }
+}
+
+.title, .name {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.title {
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: transform 0.3s ease;
+  padding: 0;
+}
+
+.backButton:hover {
+  transform: scale(1.1);
+}
+
+.arrowIcon {
+  width: 36px;
+  height: 36px;
+  filter: invert(100%);
+}
+
+@media (max-width: 768px) {
+  .arrowIcon {
+      width: 30px;
+      height: 30px;
+  }
+}
