@@ -61,6 +61,10 @@ function CrearUsuario() {
     setMessage('');
   };
 
+  const handleCancel = () => {
+    navigate('/Admin');
+  };
+
   return (
     <div className={styles.formWrapper}>
       <div className={message ? styles.formContainerWithResult : styles.formContainer}>
@@ -117,6 +121,10 @@ function CrearUsuario() {
 
           <button type="submit" className={styles.submitButton} disabled={loading}>
             {loading ? 'Creando...' : 'Crear Usuario'}
+          </button>
+
+          <button type="button" className={styles.cancelButton} onClick={handleCancel}>
+            Cancelar
           </button>
 
           {error && <p className={styles.errorMessage}>Error: {error.message}</p>}

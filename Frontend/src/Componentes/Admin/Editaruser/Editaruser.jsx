@@ -93,6 +93,10 @@ function EditUser() {
     setMessage('');
   };
 
+  const handleCancel = () => {
+    navigate('/Admin');
+  };
+
   if (!users) {
     return (
       <div className={styles.loadingWrapper}>
@@ -158,6 +162,10 @@ function EditUser() {
 
           <button type="submit" className={styles.submitButton} disabled={savingLoading}>
             {savingLoading ? 'Guardando...' : 'Guardar cambios'}
+          </button>
+
+          <button type="button" className={styles.cancelButton} onClick={handleCancel}>
+            Cancelar
           </button>
 
           {error && <p className={styles.errorMessage}>Error: {error.message}</p>}
