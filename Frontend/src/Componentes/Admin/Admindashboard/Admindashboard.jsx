@@ -6,7 +6,7 @@ import { useStore } from '../../../store/store';
 import { useNavigate } from 'react-router-dom';
 
 function Admindashboard() {
-  const { user, setUser } = useStore();
+  const { user, setUser, setUsers } = useStore();
   const { loading, error } = useFetchUsers();
   const navigate = useNavigate();
 
@@ -26,6 +26,13 @@ function Admindashboard() {
     }
   }, [user, setUser, navigate]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('loggedUser');
+    setUser(null);
+    setUsers(null);
+    navigate('/');
+  };
+
   if (!user?.administrador) {
     return (
       <div className={styles.deniedAccessWrapper}>
@@ -40,7 +47,12 @@ function Admindashboard() {
   return (
     <div className={styles.dashboardWrapper}>
       <div className={styles.dashboardContainer}>
-        <h1 className={styles.title}>Administración de Usuarios</h1>
+        <div className={styles.header}>
+          <button className={styles.logoutButton} onClick={handleLogout}>
+            Cerrar Sesión
+          </button>
+          <h1 className={styles.title}>Administración de Usuarios</h1>
+        </div>
         {loading && (
           <div className={styles.loaderWrapper}>
             <div className={styles.spinner}></div>

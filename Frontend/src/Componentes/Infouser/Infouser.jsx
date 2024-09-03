@@ -4,7 +4,7 @@ import styles from './InfoUser.module.css';
 import { useStore } from '../../store/store';
 
 const InfoUser = () => {
-  const { user } = useStore();
+  const { user, setUser } = useStore();
   const [selectedComprobante, setSelectedComprobante] = useState(null);
   const navigate = useNavigate();
 
@@ -17,6 +17,12 @@ const InfoUser = () => {
   if (!user) {
     return null;
   }
+
+  const handleLogout = () => {
+    localStorage.removeItem('loggedUser');
+    setUser(null);
+    navigate('/');
+  };
 
   const fechaInscripcion = new Date(user.fechaInscripcion);
   const yearInscripcion = fechaInscripcion.getFullYear();
@@ -80,8 +86,18 @@ const InfoUser = () => {
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.tableContainer}>
-        <h1 className={styles.title}>Historial de Comprobantes</h1>
-        <h2 className={styles.name}>{user.nombreCompleto}</h2>
+        
+        <div className={styles.header}>
+          <button className={styles.logoutButton} onClick={handleLogout}>
+            Cerrar Sesión
+          </button>
+
+          <div className={styles.containerTitle}>
+            <h1 className={styles.title}>Historial de Comprobantes</h1>
+            <h2 className={styles.name}>{user.nombreCompleto}</h2>
+          </div>
+        </div>
+
         <table className={styles.table}>
           <thead>
             <tr>
@@ -93,6 +109,7 @@ const InfoUser = () => {
           </thead>
           <tbody>{generateRows()}</tbody>
         </table>
+        
         {selectedComprobante && (
           <div className={styles.comprobanteDetails}>
             <h3>Detalles del Recibo</h3>

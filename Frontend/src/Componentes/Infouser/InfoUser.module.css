@@ -2,17 +2,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 85vh;
+    min-height: 90vh;
     background-color: #363535;
-    padding: 1.5rem 0;
+    padding: 1rem;
 }
 
 .tableContainer {
     background-color: rgba(30, 30, 30, 0.9);
-    padding: 2rem;
+    padding: 3rem 2.5rem;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
     animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -27,22 +28,35 @@
     }
 }
 
-.title {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.containerTitle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
+}
+
+.title {
+    color: #ffffff;
+    font-size: 2rem;
     text-transform: uppercase;
     font-weight: bold;
+    margin: 0;
+    text-align: center;
 }
 
 .name {
-    font-size: 1.7rem;
     color: #ffffff;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
     text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
 }
 
 .table {
@@ -86,21 +100,6 @@
     background-color: rgba(255, 99, 71, 0.15);
 }
 
-@media (max-width: 768px) {
-    .tableContainer {
-        padding: 1.5rem;
-    }
-
-    .table th, .table td {
-        padding: 8px;
-        font-size: 0.75rem;
-    }
-
-    .title {
-        font-size: 1.8rem;
-    }
-}
-
 .comprobanteDetails {
     margin-top: 2rem;
     padding: 1rem;
@@ -117,4 +116,50 @@
 
 .comprobanteDetails p {
     margin: 0.5rem 0;
+}
+
+.logoutButton {
+    background-color: #ff6347;
+    color: #ffffff;
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logoutButton:hover {
+    transform: translateY(-3px);
+}
+
+@media (max-width: 968px) {
+    .title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        display: none;
+    }
+
+    .logoutButton {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .containerTitle {
+        position: static;
+        transform: none;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logoutButton {
+        margin: 0 auto;
+    }
 }
