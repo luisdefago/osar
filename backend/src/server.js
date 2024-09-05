@@ -2,9 +2,6 @@ const app = require('./app');
 const sequelize = require('./utils/connect');
 const admin = require('firebase-admin');
 
-// console.log('Private Key:', process.env.FIREBASE_PRIVATE_KEY);
-// console.log('Replaced Key:', process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'));
-
 // Inicialización de Firebase Admin SDK con variables de entorno
 admin.initializeApp({
   credential: admin.credential.cert({
