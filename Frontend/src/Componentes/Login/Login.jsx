@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import styles from './login.module.css';
 import { useLoginUser } from '../../hooks/useLoginUser';
 import { useNavigate } from 'react-router-dom';
+import { useFetchDatosTransferencia } from '../../hooks/useFetchDatosTransferencia'; // Importa el hook
 
 function Login() {
   const [documento, setDocumento] = useState('');
   const [password, setPassword] = useState('');
   const [errorDocumento, setErrorDocumento] = useState('');
   const { loginUser, loading, error } = useLoginUser();
+  const { fetchDatosTransferencia } = useFetchDatosTransferencia(); // Usa la función aquí
   const navigate = useNavigate();
 
   const [existingUser, setExistingUser] = useState(null);
@@ -32,6 +34,7 @@ function Login() {
     const result = await loginUser({ documento, password });
 
     if (result) {
+      await fetchDatosTransferencia(); // Ejecuta el hook después del login
       result.administrador ? navigate('/Admin') : navigate('/Info-user');
     }
   };
@@ -44,6 +47,7 @@ function Login() {
       });
 
       if (result) {
+        await fetchDatosTransferencia(); // Ejecuta el hook aquí también
         result.administrador ? navigate('/Admin') : navigate('/Info-user');
       }
     }

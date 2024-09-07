@@ -110,12 +110,13 @@
 
 .comprobanteDetails h3 {
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: #ffffff;
 }
 
 .comprobanteDetails p {
     margin: 0.5rem 0;
+    font-size: 1.5rem;
 }
 
 .logoutButton {
@@ -162,4 +163,23 @@
     .logoutButton {
         margin: 0 auto;
     }
+}
+
+.transferenciaDetails {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #2e2e2e;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.transferenciaDetails h3 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+.transferenciaDetails p {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
 }
