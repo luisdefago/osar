@@ -1,0 +1,220 @@
+.formWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background-color: #363535;
+    background-position: center;
+    padding: 1rem;
+}
+
+.formContainer {
+    background-color: rgba(30, 30, 30, 0.9);
+    padding: 1.5rem 2.5rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+    max-width: 800px; /* Ampliado para más espacio en columnas */
+    width: 100%;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.formContainerWithResult {
+    background-color: rgba(30, 30, 30, 0.9);
+    padding: 1.5rem 2.5rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+    max-width: 800px; /* Ampliado para más espacio en columnas */
+    width: 100%;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.title {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.inputGroup {
+    margin-bottom: 1.5rem;
+}
+
+.formContainer form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.formContainer form .telefonoInput,
+.formContainer form button[type="submit"],
+.formContainer form button[type="button"] {
+    grid-column: span 2;
+}
+
+/* Para pantallas pequeñas, cambiamos a una sola columna */
+@media (max-width: 768px) {
+    .formContainer form {
+        grid-template-columns: 1fr;
+    }
+}
+
+.inputGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #b3b3b3;
+    font-size: 1rem;
+}
+
+.inputGroup input {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.inputGroup input:focus {
+    outline: none;
+    border-color: #ff6347;
+    box-shadow: 0 0 6px rgba(255, 99, 71, 0.5);
+}
+
+.errorMessage {
+    color: #ff6347;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: left;
+}
+
+.resultMessage {
+    color: #67ff1b;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 0;
+    margin-top: 1.5rem;
+}
+
+.telefonoInput {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.telefonoInput input {
+    flex: 1;
+    padding: 0.875rem;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.telefonoInput button {
+    background-color: #ff5c5f;
+    color: white;
+    border: none;
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.telefonoInput button:hover {
+    background-color: #ff3d40;
+    transform: translateY(-2px);
+}
+
+.telefonoInput button:active {
+    background-color: #d9373a;
+}
+
+.submitButton {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.submitButton:hover {
+    background-color: #ff4500;
+    transform: translateY(-2px);
+}
+
+.submitButton:active {
+    background-color: #e03e00;
+    transform: translateY(0);
+}
+
+.cancelButton {
+    background-color: #ff5c5f;
+    color: white;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+}
+
+.cancelButton:hover {
+    transform: translateY(-3px);
+}
+
+.addTelefonoButton {
+    background-color: #518351;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+}
+
+.addTelefonoButton:hover {
+    background-color: #4cae4c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.addTelefonoButton:active {
+    background-color: #449d44;
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}

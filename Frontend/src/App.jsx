@@ -7,6 +7,7 @@ import Agregaruser from './Componentes/Admin/Agregaruser/Agregaruser';
 import Editaruser from './Componentes/Admin/Editaruser/Editaruser';
 import AdminRecibos from './Componentes/Admin/AdminRecibos/AdminRecibos';
 import EditUser from './Componentes/Admin/Editaruser/Editaruser';
+import EditDatosTransferencia from './Componentes/Admin/DatosTransferencia/DatosTransferencia';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/Datos-usuario" element={<Editaruser/>}/>
                 <Route path="/admin/recibos/:userId" element={<AdminRecibos />} />
                 <Route path="/admin/editar/:id" element={<EditUser />} />
+                <Route path="/admin/datosTransferencia/:id" element={<EditDatosTransferencia />} />
             </Route>
     </Routes>
   )
