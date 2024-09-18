@@ -137,7 +137,7 @@ const InfoUser = () => {
             <p><strong>CUIT:</strong> {selectedTransferencia.cuit}</p>
             <p><strong>CBU:</strong> {selectedTransferencia.cbu}</p>
             <p><strong>Alias:</strong> {selectedTransferencia.alias}</p>
-            <p><strong>Enviar comprobante a:</strong> {selectedTransferencia.telefonoContacto.join(', ')}</p>
+            <p><strong>Enviar comprobante a:</strong> {selectedTransferencia.telefonoContacto.join(' / ')}</p>
           </div>
         )}
       </div>
