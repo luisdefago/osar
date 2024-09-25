@@ -69,7 +69,7 @@ function Login() {
           <h1 className={styles.title}>Inicia sesión</h1>
           <img src={logo} alt="Logo" className={styles.logo} />
         </div>
-        <p className={styles.subtitle}>Con tu número de documento y contraseña</p>
+        <p className={styles.subtitle}>{existingUser ? `Con ${existingUser.email}`: 'Con tu número de documento y contraseña'}</p>
 
         {existingUser && (
           <div className={styles.existingUserMessage}>
