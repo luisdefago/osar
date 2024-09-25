@@ -3,12 +3,11 @@
   justify-content: center;
   align-items: center;
   min-height: 85vh;
-  background-color: #363535;
   padding: 3rem 0;
 }
 
 .tableContainer {
-  background-color: rgba(30, 30, 30, 0.9);
+  background-color: rgb(30, 30, 30);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
