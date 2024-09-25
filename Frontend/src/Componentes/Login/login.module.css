@@ -4,15 +4,15 @@
     align-items: center;
     min-height: 90vh;
     background-position: center;
-    padding: 1rem;
+    padding: 1.5rem; /* Aumenté el padding para dar más espacio */
 }
 
 .loginContainer {
     background-color: rgb(30, 30, 30);
-    padding: 3rem 2.5rem;
+    padding: 4rem 3rem; /* Aumenté el padding interno */
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-    max-width: 500px;
+    max-width: 600px; /* Aumenté el tamaño máximo */
     width: 100%;
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -28,39 +28,52 @@
     }
 }
 
+.titleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.logo {
+    width: 70px; 
+    height: 70px;
+    padding: 0 20px;
+}
+
 .title {
     color: #ffffff;
-    margin-bottom: 0.5rem;
     font-size: 2.2rem;
-    text-align: center;
     text-transform: uppercase;
     font-weight: bold;
+    text-align: center;
+    width: 100%;
 }
 
 .subtitle {
     color: #b3b3b3;
     text-align: center;
     margin-bottom: 2rem;
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Ajusté ligeramente el tamaño */
 }
 
 .inputGroup {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem; /* Aumenté el margen inferior para más espacio entre campos */
 }
 
 .inputGroup label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
     color: #b3b3b3;
-    font-size: 1rem;
+    font-size: 1.1rem; /* Aumenté el tamaño del texto del label */
 }
 
 .inputGroup input {
     width: 100%;
-    padding: 0.875rem;
+    padding: 1rem; /* Aumenté el padding para inputs más grandes */
     border: 1px solid #444;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: 1.1rem; /* Aumenté el tamaño del texto del input */
     background-color: #2a2a2a;
     color: #ffffff;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -75,18 +88,17 @@
 
 .errorMessage {
     color: #ff6347;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     margin-top: 0.5rem;
     text-align: left;
 }
 
-/* Botón "Iniciar sesión" ahora tiene los colores rojos */
 .submitButton {
     background-color: #ff6347;
     color: #fff;
     border: none;
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
+    padding: 1.2rem 1.7rem; /* Aumenté el tamaño del botón */
+    font-size: 1.2rem; /* Aumenté el tamaño del texto */
     border-radius: 6px;
     cursor: pointer;
     width: 100%;
@@ -107,24 +119,24 @@
 
 .existingUserMessage {
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 1.1rem; /* Aumenté el tamaño del mensaje */
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* Aumenté el margen inferior */
 }
 
 .continueButton {
     background-color: #ff6347;
     color: #fff;
     border: none;
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
+    padding: 1.2rem 1.7rem; /* Aumenté el tamaño del botón */
+    font-size: 1.2rem; /* Aumenté el tamaño del texto */
     border-radius: 6px;
     cursor: pointer;
     width: 100%;
     transition: background-color 0.3s ease, transform 0.2s ease;
     text-transform: uppercase;
     font-weight: bold;
-    margin-top: 1rem;
+    margin-top: 1.5rem; /* Aumenté el margen superior */
 }
 
 .continueButton:hover {
@@ -138,14 +150,14 @@
 }
 
 .logoutButton {
-    background-color: #ffa500; /* Naranja */
-    margin-top: 1rem;
+    background-color: #ffa500;
+    margin-top: 1.5rem; /* Aumenté el margen superior */
 }
 
 .logoutButton:hover {
-    background-color: #ff8c00; /* Naranja más oscuro */
+    background-color: #ff8c00;
 }
 
 .logoutButton:active {
-    background-color: #ff7f50; /* Coral */
+    background-color: #ff7f50;
 }

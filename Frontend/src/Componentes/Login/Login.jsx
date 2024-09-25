@@ -3,6 +3,8 @@ import styles from './login.module.css';
 import { useLoginUser } from '../../hooks/useLoginUser';
 import { useNavigate } from 'react-router-dom';
 import { useFetchDatosTransferencia } from '../../hooks/useFetchDatosTransferencia'; // Importa el hook
+import logo from '../../assets/logo-osar.jpeg';
+
 
 function Login() {
   const [documento, setDocumento] = useState('');
@@ -62,7 +64,11 @@ function Login() {
   return (
     <div className={styles.loginWrapper}>
       <div className={styles.loginContainer}>
-        <h1 className={styles.title}>Inicia sesión</h1>
+        <div className={styles.titleContainer}>
+          <img src={logo} alt="Logo" className={styles.logo} />
+          <h1 className={styles.title}>Inicia sesión</h1>
+          <img src={logo} alt="Logo" className={styles.logo} />
+        </div>
         <p className={styles.subtitle}>Con tu número de documento y contraseña</p>
 
         {existingUser && (
