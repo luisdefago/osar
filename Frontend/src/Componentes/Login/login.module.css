@@ -4,160 +4,198 @@
     align-items: center;
     min-height: 90vh;
     background-position: center;
-    padding: 1.5rem; /* Aumenté el padding para dar más espacio */
-}
-
-.loginContainer {
+    padding: 1.5rem;
+  }
+  
+  .loginContainer {
     background-color: rgb(30, 30, 30);
-    padding: 4rem 3rem; /* Aumenté el padding interno */
+    padding: 4rem 3rem;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-    max-width: 600px; /* Aumenté el tamaño máximo */
+    max-width: 600px;
     width: 100%;
     animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
+  }
+  
+  @keyframes fadeIn {
     from {
-        opacity: 0;
-        transform: scale(0.95);
+      opacity: 0;
+      transform: scale(0.95);
     }
     to {
-        opacity: 1;
-        transform: scale(1);
+      opacity: 1;
+      transform: scale(1);
     }
-}
-
-.titleContainer {
+  }
+  
+  .titleContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 1.5rem;
-}
-
-.logo {
-    width: 70px; 
+  }
+  
+  .logo {
+    width: 70px;
     height: 70px;
     padding: 0 20px;
-}
-
-.title {
+  }
+  
+  .title {
     color: #ffffff;
     font-size: 2.2rem;
     text-transform: uppercase;
     font-weight: bold;
     text-align: center;
     width: 100%;
-}
-
-.subtitle {
+  }
+  
+  .subtitle {
     color: #b3b3b3;
     text-align: center;
     margin-bottom: 2rem;
-    font-size: 1.2rem; /* Ajusté ligeramente el tamaño */
-}
-
-.inputGroup {
-    margin-bottom: 1.8rem; /* Aumenté el margen inferior para más espacio entre campos */
-}
-
-.inputGroup label {
+    font-size: 1.2rem;
+  }
+  
+  .inputGroup {
+    margin-bottom: 1.8rem;
+  }
+  
+  .inputGroup label {
     display: block;
     margin-bottom: 0.6rem;
     color: #b3b3b3;
-    font-size: 1.1rem; /* Aumenté el tamaño del texto del label */
-}
-
-.inputGroup input {
+    font-size: 1.1rem;
+  }
+  
+  .inputGroup input {
     width: 100%;
-    padding: 1rem; /* Aumenté el padding para inputs más grandes */
+    padding: 1rem;
     border: 1px solid #444;
     border-radius: 6px;
-    font-size: 1.1rem; /* Aumenté el tamaño del texto del input */
+    font-size: 1.1rem;
     background-color: #2a2a2a;
     color: #ffffff;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
-}
-
-.inputGroup input:focus {
+  }
+  
+  .inputGroup input:focus {
     outline: none;
     border-color: #ff6347;
     box-shadow: 0 0 6px rgba(255, 99, 71, 0.5);
-}
-
-.errorMessage {
+  }
+  
+  .errorMessage {
     color: #ff6347;
     font-size: 0.9rem;
     margin-top: 0.5rem;
     text-align: left;
-}
-
-.submitButton {
+  }
+  
+  .submitButton {
     background-color: #ff6347;
     color: #fff;
     border: none;
-    padding: 1.2rem 1.7rem; /* Aumenté el tamaño del botón */
-    font-size: 1.2rem; /* Aumenté el tamaño del texto */
+    padding: 1.2rem 1.7rem;
+    font-size: 1.2rem;
     border-radius: 6px;
     cursor: pointer;
     width: 100%;
     transition: background-color 0.3s ease, transform 0.2s ease;
     text-transform: uppercase;
     font-weight: bold;
-}
-
-.submitButton:hover {
+  }
+  
+  .submitButton:hover {
     background-color: #ff4500;
     transform: translateY(-2px);
-}
-
-.submitButton:active {
+  }
+  
+  .submitButton:active {
     background-color: #e03e00;
     transform: translateY(0);
-}
-
-.existingUserMessage {
+  }
+  
+  .existingUserMessage {
     color: #ffffff;
-    font-size: 1.1rem; /* Aumenté el tamaño del mensaje */
+    font-size: 1.1rem;
     text-align: center;
-    margin-bottom: 1.5rem; /* Aumenté el margen inferior */
-}
-
-.continueButton {
+    margin-bottom: 1.5rem;
+  }
+  
+  .continueButton {
     background-color: #ff6347;
     color: #fff;
     border: none;
-    padding: 1.2rem 1.7rem; /* Aumenté el tamaño del botón */
-    font-size: 1.2rem; /* Aumenté el tamaño del texto */
+    padding: 1.2rem 1.7rem;
+    font-size: 1.2rem;
     border-radius: 6px;
     cursor: pointer;
     width: 100%;
     transition: background-color 0.3s ease, transform 0.2s ease;
     text-transform: uppercase;
     font-weight: bold;
-    margin-top: 1.5rem; /* Aumenté el margen superior */
-}
-
-.continueButton:hover {
+    margin-top: 1.5rem;
+  }
+  
+  .continueButton:hover {
     background-color: #ff4500;
     transform: translateY(-2px);
-}
-
-.continueButton:active {
+  }
+  
+  .continueButton:active {
     background-color: #e03e00;
     transform: translateY(0);
-}
-
-.logoutButton {
+  }
+  
+  .logoutButton {
     background-color: #ffa500;
-    margin-top: 1.5rem; /* Aumenté el margen superior */
-}
-
-.logoutButton:hover {
+    margin-top: 1.5rem;
+  }
+  
+  .logoutButton:hover {
     background-color: #ff8c00;
-}
-
-.logoutButton:active {
+  }
+  
+  .logoutButton:active {
     background-color: #ff7f50;
+  }
+  
+  @media (max-width: 770px) {
+    .loginContainer {
+      padding: 3rem 2rem;
+    }
+  
+    .title {
+      font-size: 1.8rem;
+    }
+  
+    .subtitle {
+      font-size: 1rem;
+    }
+  
+    .inputGroup label {
+      font-size: 1rem;
+    }
+  
+    .inputGroup input {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .submitButton, .continueButton {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .existingUserMessage {
+        font-size: 1rem;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+        padding: 0 15px;
+    }
 }
