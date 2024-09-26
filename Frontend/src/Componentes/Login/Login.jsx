@@ -66,7 +66,7 @@ function Login() {
       <div className={styles.loginContainer}>
         <div className={styles.titleContainer}>
           <img src={logo} alt="Logo" className={styles.logo} />
-          <h1 className={styles.title}>Inicia sesión</h1>
+          <h1 className={styles.title}>Iniciar sesión</h1>
           <img src={logo} alt="Logo" className={styles.logo} />
         </div>
         <p className={styles.subtitle}>{existingUser ? `Con ${existingUser.email}`: 'Con tu número de documento y contraseña'}</p>
