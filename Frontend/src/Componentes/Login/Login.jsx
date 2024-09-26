@@ -109,7 +109,7 @@ function Login() {
             <button type="submit" className={styles.submitButton} disabled={loading}>
               {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
             </button>
-            {error && <p className={styles.errorMessage}>Error: {error.message}</p>}
+            {error && <p className={styles.errorMessage}>A ocurrido un error con tus credenciales. Vuelve a intentarlo.</p>}
           </form>
         )}
       </div>
