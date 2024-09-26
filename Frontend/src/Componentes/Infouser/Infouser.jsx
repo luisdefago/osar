@@ -2,21 +2,34 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './InfoUser.module.css';
 import { useStore } from '../../store/store';
+import InfoUserMobile from './InfoUserMobile';
 
 const InfoUser = () => {
   const { user, setUser, datosTransferencia } = useStore();
   const [selectedComprobante, setSelectedComprobante] = useState(null);
   const [selectedTransferencia, setSelectedTransferencia] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
       navigate('/');
     }
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1150);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [user, navigate]);
 
   if (!user) {
     return null;
+  }
+
+  if (isMobile) {
+    return <InfoUserMobile user={user} setUser={setUser} datosTransferencia={datosTransferencia} />;
   }
 
   const handleLogout = () => {
