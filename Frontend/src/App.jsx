@@ -17,12 +17,12 @@ function App() {
     <Routes>
       <Route path="/" element={user ? <Infouser /> : <Navigate to="/login" />} />
       <Route path="/Info-user" element={user ? <Infouser /> : <Navigate to="/login" />} />
-      <Route path="/Admin" element={user ? <Admindashboard /> : <Navigate to="/login" />} />
-      <Route path="/Agregar-usuario" element={user ? <Agregaruser /> : <Navigate to="/login" />} />
-      <Route path="/Datos-usuario" element={user ? <Editaruser /> : <Navigate to="/login" />} />
-      <Route path="/admin/recibos/:userId" element={user ? <AdminRecibos /> : <Navigate to="/login" />} />
-      <Route path="/admin/editar/:id" element={user ? <EditUser /> : <Navigate to="/login" />} />
-      <Route path="/admin/datosTransferencia/:id" element={user ? <EditDatosTransferencia /> : <Navigate to="/login" />} />
+      <Route path="/Admin" element={<Admindashboard /> } />
+      <Route path="/Agregar-usuario" element={user ? <Agregaruser /> : <Navigate to="/Admin" />} />
+      <Route path="/Datos-usuario" element={user ? <Editaruser /> : <Navigate to="/Admin" />} />
+      <Route path="/admin/recibos/:userId" element={user ? <AdminRecibos /> : <Navigate to="/Admin" />} />
+      <Route path="/admin/editar/:id" element={user ? <EditUser /> : <Navigate to="/Admin" />} />
+      <Route path="/admin/datosTransferencia/:id" element={user ? <EditDatosTransferencia /> : <Navigate to="/Admin" />} />
       
       <Route path="/login" element={<Login />} />
     </Routes>
