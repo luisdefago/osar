@@ -28,7 +28,7 @@ export const useLoginUser = () => {
 
       if (userCredential) {
         setUser(userData);
-        localStorage.setItem('loggedUser', JSON.stringify({email, documento, administrador}));
+        localStorage.setItem('loggedUser', JSON.stringify({email, documento, administrador, password}));
       }
 
       return userData;

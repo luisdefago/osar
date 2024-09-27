@@ -46,7 +46,7 @@ function Login() {
     if (existingUser) {
       const result = await loginUser({
         documento: existingUser.documento,
-        password: existingUser.documento,
+        password: existingUser.password,
       });
 
       if (result) {

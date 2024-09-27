@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './login.module.css';
 import { useSendResetPasswordEmail } from '../../hooks/useSendResetPasswordEmail';
+import { useNavigate } from 'react-router-dom';
 
 const ResetPassword = () => {
     const [email, setEmail] = useState('');
@@ -9,6 +10,12 @@ const ResetPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await sendResetPasswordEmail(email);
+    };
+
+    const navigate = useNavigate();
+
+    const handleCancel = () => {
+        navigate('/');
     };
 
     return (
@@ -32,9 +39,11 @@ const ResetPassword = () => {
                 {loading ? 'Enviando...' : 'Enviar Correo de Restablecimiento'}
             </button>
             </form>
-
             {error && <p className={styles.errorMessage}>{error}</p>}
             {success && <p className={styles.successMessage}>{success}</p>}
+            <button type="button" className={styles.cancelButton} onClick={handleCancel}>
+            Cancelar
+            </button>
         </div>
         </div>
     );

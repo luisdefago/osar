@@ -204,6 +204,27 @@
     color: #ff4500;
   }
 
+
+.cancelButton {
+  background-color: #ff5c5f;
+  color: white;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  margin-top: 1rem;
+}
+
+.cancelButton:hover {
+  transform: translateY(-3px);
+}
+
+
   @media (max-width: 770px) {
     .loginContainer {
       padding: 3rem 2rem;
