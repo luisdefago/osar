@@ -9,6 +9,7 @@ import AdminRecibos from './Componentes/Admin/AdminRecibos/AdminRecibos';
 import EditUser from './Componentes/Admin/Editaruser/Editaruser';
 import EditDatosTransferencia from './Componentes/Admin/DatosTransferencia/DatosTransferencia';
 import { useStore } from './store/store';
+import ResetPassword from './Componentes/Login/ResetPassword';
 
 function App() {
   const {user} = useStore();
@@ -16,6 +17,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={user ? <Infouser /> : <Navigate to="/login" />} />
+      <Route path="/Cambiar-Contraseña" element={<ResetPassword/>} />
       <Route path="/Info-user" element={user ? <Infouser /> : <Navigate to="/login" />} />
       <Route path="/Admin" element={<Admindashboard /> } />
       <Route path="/Agregar-usuario" element={user ? <Agregaruser /> : <Navigate to="/Admin" />} />

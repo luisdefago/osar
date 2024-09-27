@@ -8,6 +8,21 @@ const InfoUserMobile = ({ user, setUser, datosTransferencia }) => {
     const [showOwedMonths, setShowOwedMonths] = useState(false);
     const navigate = useNavigate();
 
+    const meses = [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+    ];
+
     useEffect(() => {
         if (!user) {
         navigate('/');
@@ -77,11 +92,10 @@ const InfoUserMobile = ({ user, setUser, datosTransferencia }) => {
             {getOwedMonths().map((month, index) => (
                 <div
                 key={index}
-                className={styles.comprobanteItem}
+                className={styles.comprobanteItemDeuda}
                 onClick={handleTransferenciaClick}
                 >
-                <span>A Pagar</span>
-                <span>{`${month.mes}/${month.año}`}</span>
+                <span>{`Adeuda: ${meses[month.mes-1]}/${month.año}`}</span>
                 </div>
             ))}
             </div>
@@ -94,7 +108,7 @@ const InfoUserMobile = ({ user, setUser, datosTransferencia }) => {
                 onClick={() => handleComprobanteClick(comprobante)}
                 >
                 <span>Recibo {comprobante.numeroRecibo}</span>
-                <span>{`${comprobante.mes}/${comprobante.año}`}</span>
+                <span>{`${meses[comprobante.mes-1]}/${comprobante.año}`}</span>
                 </div>
             ))}
             <div className={styles.comprobanteItem} onClick={handleTransferenciaClick}>

@@ -9,7 +9,7 @@
   
   .loginContainer {
     background-color: rgb(30, 30, 30);
-    padding: 4rem 3rem;
+    padding: 3rem 3rem;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
     max-width: 600px;
@@ -162,6 +162,48 @@
     background-color: #ff7f50;
   }
   
+  .successMessage{
+    color: #ff7f50;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .passwordInputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .togglePasswordVisibility {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b3b3b3;
+  }
+  
+  .togglePasswordVisibility:hover {
+    color: #ffffff;
+  }
+  
+  .changePasswordLink {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    color: #ff2600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .changePasswordLink:hover {
+    color: #ff4500;
+  }
+
   @media (max-width: 770px) {
     .loginContainer {
       padding: 3rem 2rem;

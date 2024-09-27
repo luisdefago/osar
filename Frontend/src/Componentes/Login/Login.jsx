@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import styles from './login.module.css';
 import { useLoginUser } from '../../hooks/useLoginUser';
-import { useNavigate } from 'react-router-dom';
-import { useFetchDatosTransferencia } from '../../hooks/useFetchDatosTransferencia'; // Importa el hook
+import { useFetchDatosTransferencia } from '../../hooks/useFetchDatosTransferencia';
 import logo from '../../assets/logo-osar.jpeg';
-
+import { Eye, EyeOff } from 'lucide-react';
 
 function Login() {
   const [documento, setDocumento] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [errorDocumento, setErrorDocumento] = useState('');
   const { loginUser, loading, error } = useLoginUser();
-  const { fetchDatosTransferencia } = useFetchDatosTransferencia(); // Usa la función aquí
+  const { fetchDatosTransferencia } = useFetchDatosTransferencia();
   const navigate = useNavigate();
 
   const [existingUser, setExistingUser] = useState(null);
@@ -36,7 +37,7 @@ function Login() {
     const result = await loginUser({ documento, password });
 
     if (result) {
-      await fetchDatosTransferencia(); // Ejecuta el hook después del login
+      await fetchDatosTransferencia();
       result.administrador ? navigate('/Admin') : navigate('/Info-user');
     }
   };
@@ -49,7 +50,7 @@ function Login() {
       });
 
       if (result) {
-        await fetchDatosTransferencia(); // Ejecuta el hook aquí también
+        await fetchDatosTransferencia();
         result.administrador ? navigate('/Admin') : navigate('/Info-user');
       }
     }
@@ -61,6 +62,10 @@ function Login() {
     window.location.reload();
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className={styles.loginWrapper}>
       <div className={styles.loginContainer}>
@@ -69,7 +74,7 @@ function Login() {
           <h1 className={styles.title}>Iniciar sesión</h1>
           <img src={logo} alt="Logo" className={styles.logo} />
         </div>
-        <p className={styles.subtitle}>{existingUser ? `Con ${existingUser.email}`: 'Con tu número de documento y contraseña'}</p>
+        <p className={styles.subtitle}>{existingUser ? `Con ${existingUser.email}` : 'Con tu número de documento y contraseña'}</p>
 
         {existingUser && (
           <div className={styles.existingUserMessage}>
@@ -98,20 +103,33 @@ function Login() {
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="password">Contraseña</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className={styles.passwordInputWrapper}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className={styles.togglePasswordVisibility}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
             <button type="submit" className={styles.submitButton} disabled={loading}>
               {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
             </button>
-            {error && <p className={styles.errorMessage}>A ocurrido un error con tus credenciales. Vuelve a intentarlo.</p>}
+            {error && <p className={styles.errorMessage}>Ha ocurrido un error con tus credenciales. Vuelve a intentarlo.</p>}
           </form>
         )}
+        
+        <Link to="/Cambiar-Contraseña" className={styles.changePasswordLink}>
+          Cambiar Contraseña
+        </Link>
       </div>
     </div>
   );
