@@ -3,7 +3,7 @@ export const validarEmail = (email) => {
   };
   
   export const validarDocumento = (documento) => {
-    return /^\d{8}$/.test(documento);
+    return /^\d{6,9}$/.test(documento);
   };
   
   export const validarNombreCompleto = (nombreCompleto) => {

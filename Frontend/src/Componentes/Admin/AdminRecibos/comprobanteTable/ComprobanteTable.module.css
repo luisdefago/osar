@@ -1,4 +1,13 @@
-  
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto; /* Permite desplazamiento horizontal */
+  max-width: 100%;
+}
   .addButton {
     background-color: #9fffa3;
     color: #000000;
@@ -33,9 +42,6 @@
     }
   }
   
-  .table {
-    width: 100%;
-  }
   
   .table th, .table td {
     border: 1px solid #444;
