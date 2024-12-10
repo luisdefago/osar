@@ -11,7 +11,7 @@ import arrowIcon from '../../../assets/arrow.png';
 
 const AdminRecibos = () => {
   const navigate = useNavigate();
-  const { users } = useStore((state) => state);
+  const { users, setUsers } = useStore((state) => state);
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [selectedComprobante, setSelectedComprobante] = useState(null);
@@ -93,36 +93,55 @@ const AdminRecibos = () => {
   
       if (selectedComprobante) {
         updatedComprobante = await updateTicket(selectedComprobante.id, newComprobante);
+        setComprobantesMap((prevComprobantesMap) => {
+          const updatedComprobantesMap = { ...prevComprobantesMap };
+          // Asegúrate de que exista el año y mes antes de asignar
+          if (!updatedComprobantesMap[updatedComprobante.ticket.año]) {
+            updatedComprobantesMap[updatedComprobante.ticket.año] = {};
+          }
+          updatedComprobantesMap[updatedComprobante.ticket.año][updatedComprobante.ticket.mes] = updatedComprobante.ticket;
+          return updatedComprobantesMap;
+        });
+      
+        const updatedUsers = users.map((u) => {
+          if (u.id === user.id) {
+            const updatedComprobantes = u.comprobantes.map((comp) =>
+              comp.id === updatedComprobante.ticket.id ? updatedComprobante.ticket : comp
+            );
+            return { ...u, comprobantes: updatedComprobantes };
+          }
+          return u;
+        });
+      
+        setUsers(updatedUsers);
+        const updatedUser = updatedUsers.find((u) => u.id === user.id);
+        setUser(updatedUser);
       } else {
         updatedComprobante = await createTicket(newComprobante);
+
+        setComprobantesMap((prevComprobantesMap) => {
+          const updatedComprobantesMap = { ...prevComprobantesMap };
+          // Asegúrate de que exista el año antes de asignar el mes
+          if (!updatedComprobantesMap[updatedComprobante.año]) {
+            updatedComprobantesMap[updatedComprobante.año] = {};
+          }
+          updatedComprobantesMap[updatedComprobante.año][updatedComprobante.mes] = updatedComprobante;
+          return updatedComprobantesMap;
+        });
+      
+        const updatedUsers = users.map((u) => {
+          if (u.id === user.id) {
+            const updatedComprobantes = [...u.comprobantes, updatedComprobante];
+            return { ...u, comprobantes: updatedComprobantes };
+          }
+          return u;
+        });
+      
+        setUsers(updatedUsers);
+        const updatedUser = updatedUsers.find((u) => u.id === user.id);
+        setUser(updatedUser);
       }
 
-      const updatedUsers = users.map((u) => {
-        if (u.id === user.id) {
-          const updatedComprobantes = selectedComprobante
-            ? u.comprobantes.map((comp) =>
-                comp.id === updatedComprobante.id ? updatedComprobante : comp
-              )
-            : [...u.comprobantes, updatedComprobante];
-  
-          return { ...u, comprobantes: updatedComprobantes };
-        }
-        return u;
-      });
-  
-      useStore.getState().setUsers(updatedUsers);
-
-      const updatedUser = updatedUsers.find((u) => u.id === user.id);
-      const updatedComprobantesMap = updatedUser.comprobantes.reduce((map, comp) => {
-        const { año, mes } = comp;
-        if (!map[año]) map[año] = {};
-        map[año][mes] = comp;
-        return map;
-      }, {});
-  
-      setUser(updatedUser);
-      setComprobantesMap(updatedComprobantesMap);
-  
       setSelectedComprobante(null);
       setIsAdding(false);
     } catch (error) {
