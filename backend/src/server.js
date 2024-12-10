@@ -2,23 +2,23 @@ const app = require('./app');
 const sequelize = require('./utils/connect');
 const admin = require('firebase-admin');
 
-// // Cargar variables de entorno lo más temprano posible
-// require('dotenv').config();
+// Cargar variables de entorno lo más temprano posible
+require('dotenv').config();
 
-// // Validación de variables de entorno cruciales
-// const requiredEnvVars = [
-//   'DATABASE_URL', 
-//   'FIREBASE_PROJECT_ID', 
-//   'FIREBASE_CLIENT_EMAIL', 
-//   'FIREBASE_PRIVATE_KEY'
-// ];
+// Validación de variables de entorno cruciales
+const requiredEnvVars = [
+  'DATABASE_URL', 
+  'FIREBASE_PROJECT_ID', 
+  'FIREBASE_CLIENT_EMAIL', 
+  'FIREBASE_PRIVATE_KEY'
+];
 
-// requiredEnvVars.forEach(varName => {
-//   if (!process.env[varName]) {
-//     console.error(`Error: Falta la variable de entorno ${varName}`);
-//     process.exit(1);
-//   }
-// });
+requiredEnvVars.forEach(varName => {
+  if (!process.env[varName]) {
+    console.error(`Error: Falta la variable de entorno ${varName}`);
+    process.exit(1);
+  }
+});
 
 // Inicialización de Firebase Admin SDK con variables de entorno
 admin.initializeApp({
@@ -46,16 +46,16 @@ const main = async () => {
   }
 };
 
-// // Manejar cualquier error no capturado
-// process.on('uncaughtException', (error) => {
-//   console.error('uncaughtException:', error);
-//   process.exit(1);
-// });
+// Manejar cualquier error no capturado
+process.on('uncaughtException', (error) => {
+  console.error('uncaughtException:', error);
+  process.exit(1);
+});
 
-// // Manejar rechazos de promesas no manejados
-// process.on('unhandledRejection', (reason, promise) => {
-//   console.error('unhandledRejection:', reason);
-//   process.exit(1);
-// });
+// Manejar rechazos de promesas no manejados
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('unhandledRejection:', reason);
+  process.exit(1);
+});
 
 main();

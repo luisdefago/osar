@@ -63,7 +63,7 @@ const AdminRecibos = () => {
         numeroRecibo: comprobante.numeroRecibo,
         mes: comprobante.mes,
         año: comprobante.año,
-        fechaPago: format(comprobante.fechaPago, 'yyyy-MM-dd'),
+        fechaPago: comprobante.fechaPago,
         monto: comprobante.monto,
         usuarioId: user.id,
       });
