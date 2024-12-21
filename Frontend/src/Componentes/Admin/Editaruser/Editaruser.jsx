@@ -28,9 +28,9 @@ function EditUser() {
 
   const formatearFechaVista = (fechaISO) => {
     const fecha = new Date(fechaISO);
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-    const anio = fecha.getFullYear().toString().slice(2);
+    const dia = fecha.getUTCDate().toString().padStart(2, '0');
+    const mes = (fecha.getUTCMonth() + 1).toString().padStart(2, '0');
+    const anio = fecha.getUTCFullYear().toString().slice(2);
     return `${dia}/${mes}/${anio}`;
   };
 
@@ -57,7 +57,7 @@ function EditUser() {
     const newErrors = {};
 
     if (!validarEmail(email)) newErrors.email = 'El email debe ser válido.';
-    if (!validarDocumento(documento)) newErrors.documento = 'El número de documento debe ser un número de 8 dígitos.';
+    if (!validarDocumento(documento)) newErrors.documento = 'El número de documento debe ser de entre 6 y 9 dígitos.';
     if (!validarNombreCompleto(nombreCompleto)) newErrors.nombreCompleto = 'El nombre completo es obligatorio.';
     if (!validarFechaInscripcion(fechaInscripcion)) newErrors.fechaInscripcion = 'La fecha debe ser dd/mm/aa.';
 
