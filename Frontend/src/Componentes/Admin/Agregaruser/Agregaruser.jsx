@@ -35,7 +35,7 @@ function CrearUsuario() {
     const newErrors = {};
 
     if (!validarEmail(email)) newErrors.email = 'El email debe ser válido.';
-    if (!validarDocumento(documento)) newErrors.documento = 'El número de documento debe ser un número de 8 digitos.';
+    if (!validarDocumento(documento)) newErrors.documento = 'El número de documento debe ser de entre 6 y 9 dígitos.';
     if (!validarNombreCompleto(nombreCompleto)) newErrors.nombreCompleto = 'El nombre completo es obligatorio.';
     if (!validarFechaInscripcion(fechaInscripcion)) newErrors.fechaInscripcion = 'La fecha debe ser dd/mm/aa.';
 
