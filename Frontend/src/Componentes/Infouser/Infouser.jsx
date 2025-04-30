@@ -39,19 +39,6 @@ const InfoUser = () => {
   };
 
   const fechaInscripcion = new Date(user.fechaInscripcion);
-  const yearInscripcion = fechaInscripcion.getFullYear();
-  const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth() + 1;
-  const meses = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
-
-  const comprobantesMap = user.comprobantes.reduce((map, comp) => {
-    const { año, mes } = comp;
-    if (!map[año]) {
-      map[año] = {};
-    }
-    map[año][mes] = comp;
-    return map;
-  }, {});
 
   const handleCellClick = (comprobante) => {
     if (selectedComprobante === comprobante) {
@@ -67,28 +54,59 @@ const InfoUser = () => {
     setSelectedComprobante(null);
   };
 
+  const startYear = fechaInscripcion.getFullYear();
+  const startMonth = fechaInscripcion.getMonth() + 1;
+  // 1. Calculamos fecha final: hoy + 18 meses
+  const endDate = new Date();
+  endDate.setMonth(endDate.getMonth() + 18);
+  const endYear = endDate.getFullYear();
+  const endMonth = endDate.getMonth() + 1;
+
+  const meses = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+
+  const comprobantesMap = user.comprobantes.reduce((map, comp) => {
+    if (!map[comp.año]) map[comp.año] = {};
+    map[comp.año][comp.mes] = comp;
+    return map;
+  }, {});  
+
   const generateRows = () => {
     const rows = [];
-    for (let year = yearInscripcion; year <= currentYear; year++) {
-      const cells = meses.map((_, index) => {
-        const monthNumber = index + 1;
+    // 2. Iteramos desde el año de inscripción hasta el año final
+    for (let year = startYear; year <= endYear; year++) {
+      const cells = meses.map((_, idx) => {
+        const month = idx + 1;
 
-        if (year === yearInscripcion && monthNumber < fechaInscripcion.getMonth() + 1) {
-          return <td key={index}></td>;
+        // 3a. Antes de la inscripción: celda vacía
+        if (year === startYear && month < startMonth) {
+          return <td key={month}></td>;
+        }
+        // 3b. Después de 18 meses: celda vacía
+        if (year === endYear && month > endMonth) {
+          return <td key={month}></td>;
         }
 
-        if (year === currentYear && monthNumber > currentMonth) {
-          return <td key={index}></td>;
+        const comprobante = comprobantesMap[year]?.[month];
+        // 3c. Si hay comprobante, mostramos el recibo
+        if (comprobante) {
+          return (
+            <td
+              key={month}
+              className={styles.comprobante}
+              onClick={() => handleCellClick(comprobante)}
+            >
+              RECIBO {comprobante.numeroRecibo}
+            </td>
+          );
         }
-
-        const comprobante = comprobantesMap[year]?.[monthNumber];
+        // 3d. Si no, mostramos "A PAGAR" (hacia adelante incluye hasta +18 meses)
         return (
           <td
-            key={index}
-            className={comprobante ? styles.comprobante : styles.noComprobante}
-            onClick={() => comprobante ? handleCellClick(comprobante) : handleTransferenciaClick()} // Lógica para transferencia
+            key={month}
+            className={styles.noComprobante}
+            onClick={handleTransferenciaClick}
           >
-            {comprobante ? `RECIBO ${comprobante.numeroRecibo}` : `A PAGAR ${monthNumber}-${year}`}
+            A PAGAR {month}-{year}
           </td>
         );
       });
@@ -121,9 +139,7 @@ const InfoUser = () => {
           <thead>
             <tr>
               <th>Año</th>
-              {meses.map((mes, index) => (
-                <th key={index}>{mes}</th>
-              ))}
+              {meses.map((m, i) => <th key={i}>{m}</th>)}
             </tr>
           </thead>
           <tbody>{generateRows()}</tbody>
